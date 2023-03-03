@@ -1,0 +1,35 @@
+# Map-Reduce-Parallel-Processing-
+
+Rezolvarea consta in implementarea reprezentarii grafice
+a rularii de tip Map-Reduce.
+ Pentru thread-urile de tip Map, am folosit structura de date
+docMAP ce contine un pointer catre vectorul de fisiere text
+de intrare - **numef, array-ul de liste partiale de date - *map,
+corespunzator numarului de thread-uri Map furnizat in linia de
+comanda de rulare. 
+ Pentru thread-urile de tip Reduce, am utilizat structura de date
+docRED care contine un pointer catre structura docMAP si lista
+agregata corespunzatoare ID-ului REDUCE, furnizat in sintaxa liniei
+de rulare. 
+ Listele partiale si agregate au fost implementate sub forma 
+listelor simplu inlantuite cu info de tip int. Algoritmul de
+determinare a valorilor unice din listele agregate consta in
+stergerea valorilor multiple, ramanand o lista cu valori unice.
+ Dupa citirea secventiala a fisierului test.txt, se citesc numele 
+fisierelor de intrare al caror numar se afla pe prima linie a 
+fisierului. 
+ Distribuirea fisierelor catre thread-urile map am realizat-o static,
+prin repartitie circulara.
+ Dupa citirea fisierului si crearea structurilor de date corespunzatoare,
+docMAP si docRED, printr-o singura iteratie a thread-ului principal, am 
+pornit thread-urile Map si Reduce in functie de valorile numarului de
+thread-uri specificate in sintaxa comenzii de rulare (mai intai Map, 
+apoi Reduce).
+ Am utilizat sincronizarea thread-urilor prin "bariera" .
+ Dupa executia thread-urilor Map si actualizarea listelor partiale
+de date cu puteri perfecte, thread-urile reduce realizeaza fisierele de
+iesire out.txt cu numarul valorilor unice din listele agregate.
+ Pentru a verifica daca un numar intreg este putere perfecta,
+am utilizat o functie putereP3() ce combina 2 algoritmi : putereP() - algoritm
+naiv si putereP2() - algoritm bazat pe relatia : "radacina de ordin n
+din x este egala cu exp(log(x)/n).
